@@ -10,5 +10,8 @@
     "server.http.api.tharwa"
   ],
   "author": "ORCA",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
