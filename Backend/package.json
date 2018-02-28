@@ -12,6 +12,8 @@
   "author": "ORCA",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "sequelize": "^3.30.4",
+    "tedious": "^2.3.1"
   }
 }
