@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                        <div class="card-content ">
+                            <br>
+                            <br>
+                            <table class="table">
+                                
+                                  <thead class="table-header">
+                                    <li>Code</li>
+                                    <li>Raison Sociale</li>
+                                    <li>Adresse</li>
+                                    <li>Mail de Trensfert</li>
+                                  </thead>
+                               
+                                <tbody id="tbody">
+                                    <tr *ngFor="let banque of banques">
+                                        <td >{{banque.Code}}</td>
+                                        <td>{{banque.RaisonSocial}}</td>
+                                        <td >{{banque.Adresse}}</td>
+                                        <td >{{banque.Mail}}</td>
+                                    </tr>
+                                </tbody>
+                                
+                                
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  class="add-banque"><a routerLink="../addbanque">+</a></div>
+</body>
+</html>

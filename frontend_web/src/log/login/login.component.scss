@@ -1,0 +1,52 @@
+.content-fluid
+{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.card
+{
+    width: 30%;
+    margin-left: 10%;
+    height: 40em;
+}
+
+.material-icons--profil
+{
+    font-size:1500%;
+    margin-left: 25%;
+    color: rgb(0, 188, 212);
+}
+
+
+.envoie
+{
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+.form-group
+{
+    margin: 20%;
+    width: 60%;
+    margin-bottom: -10%;
+}
+
+
+.fond
+{
+    margin-left: 5%;
+    background-image: url("../../assets/img/fondAuth.jpg") ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%; 
+    width: 55%;
+    height: 47.3em;
+}
+
+
+.btn
+{
+    margin-top: -5%;
+}
+

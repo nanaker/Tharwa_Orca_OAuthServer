@@ -1,0 +1,61 @@
+.content
+{
+    margin-left: 20%;
+}
+
+.table-header
+{
+    background-color: rgb(172, 39, 199);
+   
+    border-style: none;
+    position: absolute;
+    width: 98%;
+    top: -20px;
+    left: 10px;
+    color: white;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgb(120,120,120);
+    display: flex;
+    flex-direction: row;
+}
+
+.table-header li
+{
+    
+    font-style: bold;
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+       border-style: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+
+.table-header li:nth-child(1)
+{
+    margin-left: -30px;
+}
+.table-header li:nth-child(2)
+{
+    margin-left: 15%;
+}
+.table-header li:nth-child(3)
+{
+    margin-left: 8%;
+}
+
+.table-header li:nth-child(4)
+{
+    margin-left: 4%;
+}
+.table-header li:nth-child(5)
+{
+    margin-left: 9%;
+}
+
+.table-header li:nth-child(6)
+{
+    margin-left: 22%;
+}
