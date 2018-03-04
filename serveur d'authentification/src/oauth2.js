@@ -14,7 +14,7 @@ let oauth2orize = require('oauth2orize'),
 const server = oauth2orize.createServer();
 
 /**
- * Exchange usr id and password for access tokens.
+ * Exchange user id and password for access tokens.
  *
  * The callback accepts the `client`, which is exchanging the user's name and password
  * from the token request for verification. If these values are validated, the
@@ -29,7 +29,6 @@ server.exchange(oauth2orize.exchange.password((client, username, password, scope
   async.series({
     
     user(callback) {
-      console.log("more validation");
       modelsSequelize.Users.findOne({
         where: {
           userId: username

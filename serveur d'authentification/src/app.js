@@ -24,29 +24,6 @@ app.use(hpp());
 app.use(passport.initialize());
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
-const cors = require('cors');
-
-// use it before all route definitions
-app.use(cors());
-app.use(function (req, res, next)
- {
-  
-      // Website you wish to allow to connect
-      //res.setHeader('Access-Control-Allow-Origin', 'http://192.168.0.68:4200');
-  
-      // Request methods you wish to allow
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  
-      // Request headers you wish to allow
-      res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  
-      // Set to true if you need the website to include cookies in the requests sent
-      // to the API (e.g. in case you use sessions)
-      res.setHeader('Access-Control-Allow-Credentials', true);
-  
-      // Pass to next layer of middleware
-      next();
-  });
 
 require('./controllers/AuthCtrl');
 
@@ -60,6 +37,6 @@ app.get('/oauth/info', oauth2.info);// pour avoir les infos du token // autoriza
 
 
 // create server
-http.createServer(app).listen(4000, () => {
-  console.log(`Express HTTP server listening on port 4000`);
+http.createServer(app).listen(8000, () => {
+  console.log(`Express HTTP server listening on port 8000`);
 });
