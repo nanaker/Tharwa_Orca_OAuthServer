@@ -15,10 +15,10 @@ const hpp = require('hpp');
 
 const app = express();
 
-// added helmet framework
+// added helmet framework pour securisé les entetes http 
 app.use(helmet());
 
-// added hpp framework
+// added hpp framework pour proteger contre  l'attaque de pollution de paramètre HTTP 
 app.use(hpp());
 
 app.use(passport.initialize());
@@ -29,7 +29,7 @@ require('./controllers/AuthCtrl');
 
 // token endpoints
 app.post('/oauth/login', oauth2.token);//pour s'authentifier cote client //doit fournir les infos de l'appli autorization basic ( appId,secret)
-                                         //+body ( grant-type=password + username(@mail)+password='')===>access token + refresh token + expire 
+                                         //+body ( grant-type=password + username(@mail)+password=''+code=0 (mail )ou 1(mobile) )===>access token + refresh token + expire 
 app.post('/oauth/refresh', oauth2.token);//ou bien pour creer un nv access token a partir d'un refresh token lors de son l'expiration // 
                                           //doit fournir les infos de l'appli autorization basic ( appId,secret)
                                          //+body ( grant-type=refresh_token + refresh_token=''===>access token + refresh token + expire

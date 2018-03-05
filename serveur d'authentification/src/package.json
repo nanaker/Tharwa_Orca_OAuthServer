@@ -1,0 +1,42 @@
+{
+    "name": "oauth",
+    "version": "0.1.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "async": "^2.1.4",
+        "body-parser": "^1.15.0",
+        "cookie-session": "~1.1.0",
+        "dotenv": "^4.0.0",
+        "ejs": "~2.1.4",
+        "express": "^4.12.3",
+        "helmet": "^3.1.0",
+        "hpp": "^0.2.1",
+        "http": "0.0.0",
+        "https": "^1.0.0",
+        "lodash": "^4.17.2",
+        "moment": "^2.17.0",
+        "nexmo": "^2.2.0",
+        "nodemailer": "^4.6.0",
+        "oauth2orize": "^1.5.1",
+        "passport": "0.3.2",
+        "passport-http": "^0.3.0",
+        "passport-http-bearer": "^1.0.1",
+        "passport-oauth2-client-password": "^0.1.2",
+        "pm2": "^2.1.5",
+        "pmx": "^0.6.8",
+        "request": "^2.74.0",
+        "sendgrid": "^4.7.1",
+        "sequelize": "^3.27.0",
+        "tedious": "^1.13.2",
+        "textmagic-rest-client": "^1.0.9",
+        "twilio": "^3.13.0",
+        "uuid-v4": "^0.1.0",
+        "validator": "^6.1.0",
+        "xss": "^0.3.1"
+    },
+    "author": "Nawal",
+    "description": "Serveur d'authentification utilisant le protocole oauth"
+}

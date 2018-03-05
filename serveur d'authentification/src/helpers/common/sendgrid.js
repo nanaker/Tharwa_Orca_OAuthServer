@@ -1,6 +1,8 @@
 
 
 var nodemailer = require('nodemailer');
+const Nexmo = require('nexmo');
+
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -25,8 +27,26 @@ transporter.sendMail(mailOptions, function(error, info){
   }
 });
 };
+const sendsms=function(num,code){
+  const nexmo = new Nexmo({
+    apiKey: '19745c21',
+    apiSecret: 'UDiTcLMcHtR1L3P2'
+   });
+   
+   nexmo.message.sendSms(
+    'Tharwa Bank', num, 'Your code confiramtion is : '+code,
+      (err, responseData) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.dir(responseData);
+        }
+      }
+   );
+};
 module.exports =
 {
   
-  sendEmail
+  sendEmail,
+  sendsms
 };
