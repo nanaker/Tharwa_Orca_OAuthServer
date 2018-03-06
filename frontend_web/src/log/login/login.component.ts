@@ -4,6 +4,7 @@ import { LogComponent } from '../log.component';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,38 +13,70 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private httpClient:HttpClient) { }
-
+  constructor(private httpClient:HttpClient,private router: Router) { }
+  
+  mail:String;
+  mdp :String;
   ngOnInit() {
+    var millis = Date.now();
+    
+    var expireTime = +localStorage.getItem('expire');
+    if ( ( millis - expireTime ) > 0 )
+    {
+      //this.router.navigateByUrl('/gestionnaire');
+    }
   }
   
+  
+  tryAuth(){
+    this.authentifier( this.mail, this.mdp );
+  }
 
-  authentifier()
+
+
+  authentifier( userMail:String, pass:String )
   {
     var headers = new HttpHeaders();
     
-
+    
     headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
-    headers = headers.append("Authorization","Basic c0xPUEthRXNDc0JoTmRzVGdRTExJVDlZeVpVU1FveVJ1bW5VcmI0NFAzdURsaWNZdHY1MVkxazlCdHpVNGVIVzpjMHhQVUV0aFJYTkRjMEpvVG1SelZHZFJURXhKVkRsWmVWcFZVMUZ2ZVZKMWJXNVZjbUkwTkZBemRVUnNhV05aZEhZMU1Wa3hhemxDZEhwVk5HVklWenB3VHpaSE5raHBkRkYzVldWSE9FNXZhMjl2VkZwVFNWaElSV1ZpZEhoUFRtbGxibE5FU2xkcFoxazJlbUo1YW0xeU1VOVNUSEo1Y210dWJHMVhVM1pZ");    
+    headers = headers.append("Authorization","Basic Y2xpZW50d2ViOm9yY2FAMjAxOA==");    
     
 
-    const body = {"grant_type":"password","username":"en_kerkar@esi.dz", "password": "orca@2018"};
 
-    this.httpClient.post('http://192.168.0.164:4000/oauth/login',body, {headers: headers})
+    const body="grant_type=password&username=" + userMail + "&password=" + pass + "";
+
+
+
+    this.httpClient.post('http://auththarwa.cleverapps.io/oauth/login',body, {headers: headers})
     .subscribe(response => 
       {
         console.log(response);
+
+        localStorage.setItem('blur','true');
+        localStorage.setItem('token_access',response["access_token"]);
+        localStorage.setItem('code',response["code"]);
+        localStorage.setItem('auth','true');
+        localStorage.setItem('refresh',response["refresh_token"]);
+        var expire = response["expires_in"];
+        expire = expire * 1000 + Date.now();
+        localStorage.setItem('expire',expire);
+        
+        this.router.navigateByUrl('/gestionnaire');
+
       }
       ,err => {
+        if(err["status"]===403)
+        {
+          alert("E-mail ou mot de passe incorrecte");
+        }
+        else if (err["status"]>= 500)
+        {
+          alert("oups il y a un soucis de la prt de notre serveur :'(");
+        }
         console.log(err);
+        console.log("User authentication failed!");
       }
     );
-    
-
-    localStorage.setItem('blur','true');
-    
   }
-
-
-
 }
