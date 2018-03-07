@@ -175,7 +175,7 @@ return callback();
   // delete user's tokens
   removeAllTokens(callback) {
     // remove all token and refresh token
-    tokenCtrl.removeAllTokens({
+    tokenCtrl.removeacessTokens({
       applicationId: client.applicationId,
       username: methodResponse.userId
     },
@@ -201,27 +201,8 @@ newToken = data;
 return callback();
 }
     );
-  },
-  refreshToken(callback) {
-    // save new refresh token
-    tokenCtrl.saveNewRefreshToken({
-      applicationId: client.applicationId,
-      username: methodResponse.userId,
-      scope: methodResponse.scope
-    },
-      // callback method
-      (err, data) => {
-        // return error
-if (err) {
-  return callback(err);
-}
-
-        // save data
-newRefreshToken = data;
-return callback();
-}
-    );
   }
+  
 }, (err) => {
   if (err) {
     console.log(err);
