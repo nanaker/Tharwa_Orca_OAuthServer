@@ -197,6 +197,25 @@ const removeAllTokens = function (req, callback) {
   return callback();
 };
 
+const removeacessTokens = function (req, callback) {
+	// remove all access tokens connected to user by app id
+  models.AccessTokens.destroy({
+    where: {
+      applicationId: req.applicationId,
+      userId: req.username
+    }
+  })
+	// catch error
+	.catch((e) => {
+  console.log(e);
+  return callback(true);
+});
+
+	
+	// success
+  return callback();
+};
+
 module.exports = {
   createToken,
 
@@ -208,5 +227,6 @@ module.exports = {
 
   saveNewRefreshToken,
 
-  removeAllTokens
+  removeAllTokens,
+  removeacessTokens
 };
