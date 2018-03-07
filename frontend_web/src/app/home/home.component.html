@@ -18,13 +18,13 @@
                 <p>Entrez le ici pour pouvoir continuer</p>
                 <br>
                 <div>
-                    <input type="text" maxlength="1">
-                    <input type="text" maxlength="1">
+                    <input [(ngModel)]='code[0]' type="text" maxlength="1">
+                    <input [(ngModel)]='code[1]' type="text" maxlength="1">
                     - 
-                    <input type="text" maxlength="1">
-                    <input type="text" maxlength="1">
+                    <input [(ngModel)]='code[2]' type="text" maxlength="1">
+                    <input [(ngModel)]='code[3]' type="text" maxlength="1">
                 </div>
-                <button class="code-valider" (click)="deleteBlur()">Vérifier mon email</button>
+                <button class="code-valider" (click)="tryDeleteBlur()">Vérifier mon email</button>
                 <br>
                 <a>pas reçu ? <b>Renvoyer</b> </a>
         </div>  
