@@ -45,9 +45,9 @@ const token = {
  * instanceName -
  */
 const dbConnString = {
-  userName: 'cnx',
+  userName: 'tharwa',
   password: 'orca@2018',
-  server: 'localhost',
+  server: 'den1.mssql6.gear.host',
   options: {
     database: 'THARWA',
     encrypt: 'true'
