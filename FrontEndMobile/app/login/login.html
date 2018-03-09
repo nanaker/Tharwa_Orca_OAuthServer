@@ -1,0 +1,14 @@
+<ActionBar title="App Test" class="action-bar">
+    <NavigationButton text="Retour" ios.position="left"></NavigationButton>
+</ActionBar>
+<StackLayout>
+    <Image src="res://logo_login" stretch="none" horizontalAlignment="center"></Image>
+  
+    <TextField hint="Email Address" keyboardType="email" [(ngModel)]="user.email"
+      autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
+    <Button text="Se connecter" class="submit-button" (tap)="submit()"></Button>
+    
+    <Button text="Créer un compte"  (tap)="register()"></Button>
+    
+</StackLayout>
