@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "API"
+		}
+	],
+	"settings": {
+		"mocha.enabled": true
+	}
+}
