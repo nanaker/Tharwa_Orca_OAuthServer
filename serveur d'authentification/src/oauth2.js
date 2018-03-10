@@ -149,6 +149,7 @@ return callback();
     tokenCtrl.saveNewAccessToken({
       applicationId: client.applicationId,
       username: methodResponse.userId,
+      expires: config.token.calculateExpirationDate(),
       scope: methodResponse.scope
     },
       // callback method
@@ -170,7 +171,7 @@ return callback();
     console.log(err);
     return done(null);
   }
-  return done(null, newToken, newRefreshToken, {
+  return done(null, newToken, {
     expires_in: config.token.expiresIn
   });
 });
@@ -227,12 +228,16 @@ exports.login = [
       modelsSequelize.Users.findOne({
         where: {userId: id} })
      .then(function(userFound){
+     console.log('apres la requete');
     if(userFound){ // si l'utilisateur existe
+     console.log('userfpund');
         const passwordHash = crypto.createHmac('sha256', Password).digest('hex');
         if (userFound.dataValues.password !== passwordHash) {
+         console.log('mot de passe incorrecte');
           return res.status(409).json({'error':"mot de passe incorrecte" });
         }
         else { //mot de passe correct  
+         console.log('delete');
           modelsSequelize.Code.destroy({
             where: { userId: id }});
            let nb =  utils.nbalea(4);
