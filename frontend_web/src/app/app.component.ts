@@ -20,44 +20,56 @@ export class AppComponent {
   title = 'app';
   constructor(private httpClient:HttpClient, private router: Router){}
   
+//fonction retourne si oui ou non le token actuel est valide
+  getTokenInfo(token_access:String)
+  {
+    var alive : Boolean = false;
+    var headers = new HttpHeaders();
+    headers = headers.append("Authorization","Bearer "+token_access+"");
+    
+    return this.httpClient.get("https://auththarwa.cleverapps.io/oauth/info",{headers:headers});
+  }
+
   public verifToken(){
-    var millis = Date.now();
-    var expireTime = 0;
-    var expireTime = +localStorage.getItem('expire');
-  
-    if ( ( millis - expireTime ) >= 0 )
-    {
-      
-      
-      var headers = new HttpHeaders();
-      headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
-      headers = headers.append("Authorization","Basic Y2xpZW50d2ViOm9yY2FAMjAxOA==");    
-      
-      const body="grant_type=refresh_token&refresh_token=" + localStorage.getItem('refresh') + "" ;
+    
 
+      var valide = this.getTokenInfo(localStorage.getItem('token_access'));
 
-      this.httpClient.post('http://auththarwa.cleverapps.io/oauth/login',body, {headers: headers})
-      .subscribe(response => 
-        {
-          console.log(response);
-  
-          
-          localStorage.setItem('token_access',response["access_token"]);
-          localStorage.setItem('auth','true');
-          localStorage.setItem('refresh',response["refresh_token"]);
-          var expire = response["expires_in"] + Date.now();
-  
-          localStorage.setItem('expire',expire);
-          alert("pas de redirection");
-        }
-        ,err => {
-          
-            this.router.navigateByUrl('http://localhost:4200');
-            alert("redirection à home");
-          
-        }
-      );
-    } 
+      valide.subscribe(data=>
+      {
+        console.log(data);
+      }
+      ,err =>
+      {
+        var headers = new HttpHeaders();
+        headers = headers.append("Content-Type", "application/x-www-form-urlencoded");
+        headers = headers.append("Authorization","Basic Y2xpZW50d2ViOm9yY2FAMjAxOA==");    
+        
+        const body="grant_type=refresh_token&refresh_token=" + localStorage.getItem('refresh') + "" ;
+        
+
+        this.httpClient.post('https://auththarwa.cleverapps.io/oauth/refresh',body, {headers: headers})
+        .subscribe(response => 
+          {
+            
+            console.log(response);
+    
+            
+            localStorage.setItem('token_access',response["access_token"]);
+
+            var expire = response["expires_in"];
+            expire = expire * 1000 + Date.now();
+    
+            localStorage.setItem('expire',expire);
+          }
+          ,err => {
+              console.log(err);      
+              this.router.navigateByUrl('/');
+          }
+        );
+      }
+    );
+
   }
 
 
@@ -68,15 +80,6 @@ export class AppComponent {
 
   
 
-  getProfile()
-  {
-    this.httpClient.get('http://127.0.0.1:8080/page')
-    .subscribe(
-      (data:any[]) =>
-      {
-        console.log(data["name"]);
-      }
-    )
-  }
+
 
 }
