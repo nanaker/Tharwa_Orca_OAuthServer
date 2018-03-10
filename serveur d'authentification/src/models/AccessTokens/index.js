@@ -20,6 +20,7 @@ module.exports = function (sequelize, DataTypes) {
 
       expires: DataTypes.DATE,
       
+      
     },
     {
       classMethods: {

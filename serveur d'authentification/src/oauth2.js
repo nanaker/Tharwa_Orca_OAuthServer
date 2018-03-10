@@ -20,36 +20,30 @@ const server = oauth2orize.createServer();
 * from the token request for verification. If these values are validated, the
 * application issues an access token on behalf of the user who authorized the code.
 */
-server.exchange(oauth2orize.exchange.password((client, username, password, code, scope, done) => {
+server.exchange(oauth2orize.exchange.password((client, username, password, scope, done) => {
 const userScope = (scope) ? scope[0] : '';
 let token = {};
 let refreshToken = {};
 nb = {};
 
 async.series({
-  
-  user(callback) {
-    modelsSequelize.Users.findOne({
+ code(callback) {
+    modelsSequelize.Code.findOne({
       where: {
         userId: username
       }
-    }).then((user) => {
+    }).then((code) => {
       // check if user is valid
-      if (_.isEmpty(user)) {
+      if (_.isEmpty(code)) {
         return callback(true); // error
       }
-      const passwordHash = crypto.createHmac('sha256', password)
-        
-        .digest('hex');
-
-      // check if client secret provided matches the server code
-      if (user.dataValues.password !== passwordHash) {
-        return callback(true); // error
+      else { // verifier si le code n'a pas expire et si il est valide
+      const expirationLeft = Math.floor((code.expires.getTime() - Date.now()) / 1000);
+      if(expirationLeft<0) return callback('le code a expire');
+      else {
+        if (password!=code.codeId) return callback('le code n"est pas valide');
       }
-      
-
-
-
+      }
       callback();
     });
   },
@@ -96,38 +90,6 @@ async.series({
     }).then(() => {
       callback();
     }).catch(err => callback(err));
-  },
-  Send(callback) {
-    nb = utils.nbalea(4);
-    modelsSequelize.Users.findOne({
-      attributes:['numTel'],
-      where: {
-        userId: username
-      }
-    }).then((user) => {
-      if (user){
-      
-  
-      if(code=='1'){
-        
-        sendgrid.sendsms(user.numTel,nb);
-               
-      }
-      else{
-        
-        sendgrid.sendEmail(username, nb);
-         
-      }
-    }
-    else {
-      
-        return callback(true); // error
-      
-    }
-    
-    });
-    
-    callback();
   }  
 }, (err) => {
   if (err) {
@@ -138,7 +100,7 @@ async.series({
   // success
  
   return done(null, token, refreshToken, {
-    expires_in: config.token.expiresIn, code: nb,
+    expires_in: config.token.expiresIn,
   });
 });
 }));
@@ -250,5 +212,57 @@ function (req, res) {
   });
 }
 ];
+
+exports.login = [
+ 
+  function (req, res) {
+
+       var id = req.body.userId;
+        var Password = req.body.Pwd;
+        var code = req.body.code;
+
+        if(id == null ||  Password == null || code == null){ // un des parametres manquent
+          return res.status(400).json({'error':'missing parameters'});
+      }
+      modelsSequelize.Users.findOne({
+        where: {userId: id} })
+     .then(function(userFound){
+    if(userFound){ // si l'utilisateur existe
+        const passwordHash = crypto.createHmac('sha256', Password).digest('hex');
+        if (userFound.dataValues.password !== passwordHash) {
+          return res.status(409).json({'error':"mot de passe incorrecte" });
+        }
+        else { //mot de passe correct  
+          modelsSequelize.Code.destroy({
+            where: { userId: id }});
+           let nb =  utils.nbalea(4);
+           modelsSequelize.Code.create({
+            userId: id,
+            codeId: nb,
+            expires: config.token.calculateExpirationDate()
+          }).then(function(newCode){
+          let nb=newCode.codeId;
+          modelsSequelize.Users.findOne({
+          attributes:['numTel'],
+          where: { userId: id}
+          }).then((user) => {
+          if (user) // si le numero de tel existe
+          {  if(code=='1'){sendgrid.sendsms(user.numTel,nb); } // envoyer le code par sms
+             else{sendgrid.sendEmail(id, nb); }     } // envoyer le code par email 
+          else return res.status(409).json({'error':"impossible de trouver le numero de telephone" });
+          }).catch(err => {console.error('impossible de trouver le numero de telephone ', err);});
+          return res.status(200).json({'succe':"l'utilisateur est verifie" });
+          }).catch(err => {console.error('Unable to add code:', err);});
+        }}
+        else{ //utilisateur n'existe pas
+        return res.status(409).json({'error':"l'utilisateur n'existe pas" });  }
+    })
+    .catch(function(err){
+        return res.status(500).json({'error':'Can\'t verify parameters'});
+        console.log(err);
+    }); 
+    
+  }
+  ];
 
 
