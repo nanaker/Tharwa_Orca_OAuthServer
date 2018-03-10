@@ -25,19 +25,37 @@ authentifier(user :User)
   
 
   headers.append("Content-Type", "application/x-www-form-urlencoded");
-  headers.append("Authorization","Basic Y2xpZW50bW9iaWxlOm9yY2FAMjAxOA==");    
- // console.log("Blabla");
+  //headers.append("Authorization","Basic Y2xpZW50bW9iaWxlOm9yY2FAMjAxOA==");    
 
-  //const body = JSON.stringify({grant_type:"password",username:"en_kerkar@esi.dz", password: "orca@2018"});
+  const body="userId="+user.email+"&Pwd="+user.password+"&code=0"
 
-  const body="grant_type=password&username="+user.email+"&password="+user.password+"&code=1"
-
-  return this.http.post('http://192.168.101.17:8000/oauth/login',body, {headers: headers})
+  return this.http.post('http://auththarwa.cleverapps.io/oauth/code',body, {headers: headers})
   .catch(this.handleErrors);
-  
+}
+sendCode(username :string ,code: string)
+{
+  console.log("user is "+ username +"code is "+ code);
+  var headers = new Headers();
 
- // localStorage.setItem('blur','true');
-  
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+  headers.append("Authorization","Basic Y2xpZW50bW9iaWxlOm9yY2FAMjAxOA=="); 
+
+  const body="grant_type=password&username="+username+"&password="+code
+
+  return this.http.post('http://auththarwa.cleverapps.io/oauth/login',body, {headers: headers})
+  .catch(this.handleErrors);
+}
+refreshLogin(refresh_token)
+{
+  var headers = new Headers();
+
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+  headers.append("Authorization","Basic Y2xpZW50bW9iaWxlOm9yY2FAMjAxOA=="); 
+
+  const body="grant_type=refresh_token&refresh_token="+refresh_token
+
+  return this.http.post('http://auththarwa.cleverapps.io/oauth/refresh',body, {headers: headers})
+  .catch(this.handleErrors);
 }
 
   
@@ -82,8 +100,8 @@ authentifier(user :User)
   }
 
   handleErrors(error: Response) {
-    console.log("blabla");
-        console.log(JSON.stringify(error.json()));
+  
+    console.log(JSON.stringify(error.json()));
     return Observable.throw(error);
   }
 }
