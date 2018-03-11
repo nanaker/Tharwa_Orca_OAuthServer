@@ -1,0 +1,169 @@
+.nav-header
+{
+    color:black;
+}
+.nav-items
+{
+    text-align: center;
+    color: black;
+    width: 50%;
+}
+.nav-tabs
+{
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    width: 100%;
+}
+
+
+.link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: black;
+  }
+  
+  .link:hover, .link:focus {
+    text-decoration: none;
+    color: red;
+  }
+  
+  .link.disabled {
+    color: #6c757d;
+  }
+  
+  .nav-tabs .link {
+    border: 1px solid transparent;
+  }
+  
+  .nav-tabs .link.disabled {
+    color: #6c757d;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  
+  .nav-tabs .link.active,
+  .nav-tabs .nav-item.show .link {
+    color:red;
+  }
+
+.link:visited
+{
+    color: black;
+}
+
+
+.container-cards
+{
+    align-items: center;
+    margin-left: 22%;
+}
+
+.card-dash
+{
+    width: 250px;
+    font-size: 14px;
+    margin-right: 1.5%;
+}
+
+
+.card-dash .card-stats
+{
+    height: 135px;
+}
+
+
+.card-footer--home
+{
+    background-color:transparent;
+    height: 30px;
+}
+
+.activTab
+{
+    background-color: rgba(250, 206, 206,0.2);
+    border-bottom-color: red;
+    border-bottom-style: solid;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    color: red;
+}
+
+
+
+
+
+.header
+{
+    width: 100%;
+    border-style: none;    
+}
+
+.header:hover
+{
+    border-style: none;
+}
+
+.container-dash
+{
+    box-shadow: 1px 1px 8px rgb(190,190,190);
+    background-color: white;
+    width: 97%;
+    border-radius: 3px;
+}
+
+
+.container-graphe
+{
+    border-radius: 5px;
+    box-shadow:  1px 1px 8px rgb(190,190,190);
+    margin-right: 25px;
+    width: 48%;
+    margin-top: 30px;
+
+}
+
+.container-graphe .card-header
+{
+    height: 60px;
+}
+.container-graphe .card-header h4
+{
+    margin-top: -10px;
+}
+
+.footer .legend i
+{
+    margin-left: 20px;
+}
+svg
+{
+    width: 100%; height: 245px;
+}
+
+.xlabels
+{
+    position: absolute;
+    top: 250px;
+    left: 50px;
+}
+.xlabels .ct-label
+{
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.ylabels
+{
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ylabels .ct-label
+{
+    margin-bottom: 10px;
+    font-size: 13px;
+}

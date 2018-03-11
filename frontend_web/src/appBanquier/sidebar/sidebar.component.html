@@ -1,0 +1,74 @@
+
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body>
+        <div class="sidebar" data-color="red" bg-color="black"> 
+                <div class="logo">
+                    <a href="" class="simple-text">
+                        <i>THARWA Banque</i>
+                    </a>
+                </div>
+    
+                <div class="sidebar-wrapper">
+                    <ul class="nav flex-column">
+                        <li [ngClass] = "{'active':selectedItem===1}" (click)="selectedItem = 1">
+                            <a [routerLink]="[{ outlets: { popup: ['dash'] } }]">
+                                <i class="material-icons">dashboard</i>
+                                <p>Accueil</p>
+                            </a>
+                        </li>
+                        <li [ngClass] = "{'active':selectedItem===2}" (click)="selectedItem = 2">
+                            <a [routerLink]="[{ outlets: { popup: ['profil'] } }]">
+                                <i class="material-icons">person</i>
+                                <p>Profile</p>
+                            </a>
+                        </li>
+                        <li [ngClass] = "{'active':selectedItem===3}" (click)="selectedItem = 3">
+                            <a [routerLink]="[{ outlets: { popup: ['listvirexterne'] } }]">
+                                <i class="material-icons">content_paste</i>
+                                <p>Virements externes</p>
+                            </a>
+                        </li>
+                        <li [ngClass] = "{'active':selectedItem===4}" (click)="selectedItem = 4">
+                            <a [routerLink]="[{ outlets: { popup: ['listbanquier'] } } ]">
+                                <i class="material-icons">people</i>
+                                <p>Géstion des banquiers</p>
+                            </a>
+                        </li>
+                        <li [ngClass] = "{'active':selectedItem===7}" (click)="selectedItem = 7">
+                                <a [routerLink]="[{ outlets: { popup: ['addbanquier'] } } ]">
+                                    <i class="material-icons">add_circle_outline</i>
+                                    <p>Créer Compte Banquier</p>
+                                </a>
+                            </li>
+                        <li [ngClass] = "{'active':selectedItem===5}" (click)="selectedItem = 5">
+                            <a [routerLink]="[{ outlets: { popup: ['listbanque'] } } ]">
+                                <i class="material-icons">account_balance</i>
+                                <p>Liste des Banques</p>
+                            </a>
+                        </li>
+                        <li [ngClass] = "{'active':selectedItem===6}" (click)="selectedItem = 6">
+                                <a [routerLink]="[{ outlets: { popup: ['addbanque'] } } ]">
+                                    <i class="material-icons">add_circle_outline</i>
+                                    <p>Ajouter une Banque</p>
+                                </a>
+                        </li>
+                    </ul>
+                </div>
+          </div>
+</body>
+</html>
+  
