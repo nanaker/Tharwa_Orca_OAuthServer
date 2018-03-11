@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="content">
+    <div class="card">
+      <div class="card-header" data-background-color="red">
+        <h4>Créer un Compte Banquier</h4>
+        <p>Ajoutez un nouveau Banquier à THARWA</p>
+      </div>
+      <div class="card-content">
+        <form>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group label-floating ">
+                  <label class="control-label">Adresse E-mail</label>
+                  <input type="email" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group label-floating">
+                  <label class="control-label">Nom</label>
+                  <input type="text" class="form-control" required maxlength="25">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group label-floating ">
+                  <label class="control-label">Prénom</label>
+                  <input type="text" class="form-control" required maxlength="25">
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+              <div class="col-md-6"> 
+                <div class="form-group label-floating ">
+                    <label class="control-label">Adresse</label>
+                    <input type="email" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group label-floating ">
+                    <label class="control-label">Téléphone</label>
+                    <input type="tel" class="form-control" required maxlength="14">
+                </div>
+              </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group label-floating ">
+                  <label class="control-label">Photo</label>
+                  <input type="email" class="form-control" required>
+              </div>
+            </div>
+              <button class="btn parcourir-photo" data-background-color="red">
+                <label for="file" class="label-file">Parcourir</label>
+                <input id="file" class="input-file" type="file">
+              </button>
+          </div>
+
+          <button type="submit" class="btn pull-right" data-background-color="red">Ajouter</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

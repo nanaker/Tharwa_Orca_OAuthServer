@@ -1,0 +1,33 @@
+<ActionBar title="Créer un Compte" class="action-bar">
+    <NavigationButton text="Retour" ios.position="left"></NavigationButton>
+</ActionBar>
+<GridLayout backgroundColor="#CCCCCC">
+    <ScrollView>
+        <StackLayout margin="10" verticalAlignment="center">
+            <StackLayout class="form" padding="15" backgroundColor="#FFFFFF">
+                <StackLayout class="input-field">
+                    <Label text="Adresse" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="user.address"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Téléphone" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="user.phone"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                    <Label text="Fonction" class="label font-weight-bold m-b-5"></Label>
+                    <TextField class="input" [(ngModel)]="user.job"></TextField>
+                    <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <StackLayout class="input-field">
+                <Button  text="Photo de profil" (tap)="takePic()"></Button>
+                <Image [src]="picture" width="200" height="200"></Image>
+                <StackLayout class="hr-light"></StackLayout>
+                </StackLayout>
+                <Button  text="Confirmer" (tap)="register()" class="submit-button"></Button>
+                <Label (tap)="goBack()" text="Vous possédez un compte? Se conntecter ici." class="text-center footnote"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
