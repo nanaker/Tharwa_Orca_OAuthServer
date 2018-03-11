@@ -45,8 +45,6 @@ server.get('/', function (req, res) {
    //sql.close()
 });
 
-
-
 //Models
 const User = sequelize.import(__dirname + "/models/Users");
 
