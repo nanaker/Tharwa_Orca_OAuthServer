@@ -1,4 +1,4 @@
-
+//imports
 module.exports = function(express,usersController){
    
     const router = express.Router();
@@ -6,8 +6,8 @@ module.exports = function(express,usersController){
         usersController.inscription(req,res);
     });
 
-    router.get('/dashBoard',(req,res) =>{
-        usersController.dashBoard(req,res);
+    router.post('/logedIn',(req,res) =>{
+        usersController.logedIn(req,res);
     });
 
     return router;

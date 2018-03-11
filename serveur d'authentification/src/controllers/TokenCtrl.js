@@ -52,7 +52,7 @@ const saveNewAccessToken = function (req, result) {
     tokenId: token,
     userId: req.username,
     applicationId: req.applicationId,
-    expires: req.expires,
+    expires: TokenExpirationEnum.TOKEN,
     scope: req.scope
   })
 	// success
