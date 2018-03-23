@@ -256,7 +256,7 @@ exports.login = [
              else{sendgrid.sendEmail(id, nb); }     } // envoyer le code par email 
           else return res.status(409).json({'error':"impossible de trouver le numero de telephone" });
           }).catch(err => {console.error('impossible de trouver le numero de telephone ', err);});
-          return res.status(200).json({'succe':"l'utilisateur est verifie" });
+          return res.status(200).json({'succe':"l'utilisateur est verifie" ,'type':userFound.dataValues.type});
           }).catch(err => {console.error('Unable to add code:', err);});
         }}
         else{ //utilisateur n'existe pas
