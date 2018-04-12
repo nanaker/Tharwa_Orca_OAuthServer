@@ -1,5 +1,4 @@
 
-
 var nodemailer = require('nodemailer');
 const Nexmo = require('nexmo');
 
@@ -8,7 +7,7 @@ var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'tharwa.ebank@gmail.com',
-    pass: '@james-hetfield@'
+    pass: 'orca@2018'
   }
 });
 const sendEmail = function (to ,code){
